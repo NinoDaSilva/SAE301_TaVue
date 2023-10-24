@@ -3,7 +3,7 @@
 //
 import {useHead} from '@unhead/vue'
 useHead ({
-  title: 'Personnalisation - TaVue'
+  title: 'Accueil - TaVue'
 }) 
 //
 </script>
