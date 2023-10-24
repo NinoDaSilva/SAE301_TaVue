@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer base {
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Nunito', sans-serif;
+    };
+}
+
+@layer components {
+    .menu-link {
+        @apply block px-4 py-4 hover:opacity-60 duration-200 max-md:text-2xl;
+    }
+    .link {
+        @apply hover:opacity-60 duration-200;
+    }
+}
