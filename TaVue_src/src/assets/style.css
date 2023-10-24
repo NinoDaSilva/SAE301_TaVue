@@ -16,6 +16,15 @@
         @apply block px-4 py-4 hover:opacity-60 duration-200 max-md:text-2xl;
     }
     .link {
-        @apply hover:opacity-60 duration-200;
+        @apply hover:opacity-60 duration-200 cursor-pointer;
+    }
+    .input_news {
+       border: none;
+       border-radius: 50px;
+       padding: 8px 20px;
+       min-width: 300px;
+    }
+    .item_footer_list {
+        @apply mt-3;
     }
 }

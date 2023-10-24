@@ -21,7 +21,7 @@
 
 <template>
     <header :class="{'!-translate-y-full !bg-transparent': !dirTop, '!bg-special': underLimit}"
-        class="bg-special fixed z-50 flex w-full translate-y-0 items-center px-5 lg:px-12 pb-1 pt-5 transition-all duration-300 ease-in-out text-base font-Khand text-blanc md:text-xl">
+        class="bg-special mb-5 flex w-full translate-y-0 items-center px-5 lg:px-12 pb-1 pt-5 transition-all duration-300 ease-in-out text-base font-Khand text-blanc md:text-xl">
         <div class="mr-8">
             <a class="link" href="/"><LogoTaVue /></a>
         </div>
