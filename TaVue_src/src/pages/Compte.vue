@@ -75,6 +75,14 @@
       currentUser.value = pb.authStore.model;
     }
   }
+  // Fonction connexion avec Google
+  const githubLogin = async() => {
+    const authData = await pb.collection("users").authWithOAuth2({ provider: "github" });
+    if (pb.authStore.isValid) {
+      isConnected.value = true;
+      currentUser.value = pb.authStore.model;
+    }
+  }
   // Fonction inscription
   const register = async() => {
     try {
@@ -136,12 +144,12 @@
   <div v-if="!isConnected && !showInscription" class="text-center max-lg:mb-20 lg:dispo">
     <div class="mt-40">
       <h1 class="mb-8 text-3xl font-Khand font-bold title-shadow">Connexion</h1>
-      <form @submit.prevent="connect()">
+      <form>
         <input class="block mx-auto input-connect" type="email" required id="email" placeholder="Mail" v-model="user">
         <input class="block mx-auto input-connect" type="password" required id="passwd" placeholder="Mot de passe" v-model="psw">
         
         <div class="flex gap-3 justify-center mt-7 mb-5">
-          <button type="submit"><Btn text="Se connecter"/></button>
+          <button type="submit" @click="connect()"><Btn text="Se connecter"/></button>
           <!-- Connexion btn Google -->
           <button @click="googleLogin()">
             <Btn text="Google">
