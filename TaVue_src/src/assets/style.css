@@ -27,4 +27,14 @@
     .item_footer_list {
         @apply mt-3;
     }
+    .input-connect {
+        @apply bg-secondary border border-[#C0BCBC] px-5 rounded-3xl p-2 w-2/5 mt-4;
+    }
+    .dispo {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+    .title-shadow {
+        text-shadow: 3px 2px 0 rgba(0, 0, 0, 0.5);
+    }
 }

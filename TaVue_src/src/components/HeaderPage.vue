@@ -2,14 +2,16 @@
     import { ref, computed, watch } from 'vue'
     import { useWindowScroll } from '@vueuse/core'
 
-    import LogoTaVue from '@/components/icons/LogoTaVue.vue';
-    import IconAccount from '@/components/icons/IconAccount.vue';
+    // Import components
+    import LogoTaVue from '@/components/icons/LogoTaVue.vue'
+    import IconAccount from '@/components/icons/IconAccount.vue'
 
+    // Fonction de ouverture / fermeture du menu
     const menuIsOpen = ref(false)
     function closeMenu() {
         menuIsOpen.value = false
     }
-
+     // Plugin
     const { y } = useWindowScroll()
     const underLimit = computed(() => y.value < 400)
 
@@ -17,6 +19,7 @@
         watch(y, (y, oldY) => {
         dirTop.value = y < oldY
     })
+    //
 </script>
 
 <template>

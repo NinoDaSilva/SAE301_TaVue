@@ -22,7 +22,7 @@ export default {
       'lg':   '1.375rem',    //22px
       'xl':   '1.5rem',      //24px
       '2xl':  '1.875rem',    //30px
-      '3xl':  '2.5rem',      //80px
+      '3xl':  '5.625rem',    //90px
     },
     extend: {}
   },
