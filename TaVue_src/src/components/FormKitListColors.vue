@@ -8,17 +8,18 @@ defineProps<{
 <template>
   <FormKit
     :name="name"
-    :label="label"
-    value="#FFFFFF"
+    value="#000000"
     type="radio"
     :options="colors"
     :sections-schema="{
         inner: { $el: null },
         decorator: { $el:null },
-    }" input-class="peer sr-only" options-class="flex gap-4">
-    <template #label="context">
-        <div class="h-6 w-6 rounded-full border-noir border-2 peer-checked:border-noir" :style="{ backgroundColor: context.option.value}"></div>
-            <span class="sr-only">{{ context.option.label }}</span>
+    }" 
+    input-class="" 
+    options-class="flex gap-7">
+    
+        <template #label="context">
+            <div class="h-8 w-11 mt-2 -ml-2 border-special border-2" :style="{ backgroundColor: context.option.value}"></div>
         </template>
     </FormKit>
 </template>

@@ -2,7 +2,6 @@ export interface Lunette {
     branches?: string;
     cadre?: string;
     verres?: string;
-    commander?: boolean;
     id?: string;
   };
   export const colors = {

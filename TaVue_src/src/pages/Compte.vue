@@ -6,6 +6,7 @@
     // Import components
     import Btn from '@/components/Btn.vue';
     import IconGoogleVue from '@/components/icons/IconGoogle.vue';
+    import CardHistorique from '@/components/CardHistorique.vue';
 
     // PocketBase vps connexion
     var pocketbase_ip=''
@@ -124,14 +125,15 @@
   <!-- User connected -->
   <span v-if="isConnected" class="mt-10 mb-10 grid text-center">
     <img id="avatar" :src=avatar class="hidden mx-auto mb-4" alt="avatar" />
-    <span class="mr-2 ml-2">
-      {{ currentUser.name }}
+    <h2 class="text-xl mb-2">Heureux de vous revoir !</h2>
+    <span class="mr-2 ml-2 text-lg">
+      {{ currentUser.username }}
     </span>
     <button class="mx-auto w-[200px] h-12 mt-5" type="button" @click="deconnect()"><Btn class="" text="Déconnexion" /></button>
   </span>
 
   <!-- User not connected -->
-  <div v-if="!isConnected && !showInscription" class="text-center dispo">
+  <div v-if="!isConnected && !showInscription" class="text-center max-lg:mb-20 lg:dispo">
     <div class="mt-40">
       <h1 class="mb-8 text-3xl font-Khand font-bold title-shadow">Connexion</h1>
       <form @submit.prevent="connect()">
@@ -148,6 +150,13 @@
               </template>
             </Btn>
           </button>
+          <button @click="githubLogin()">
+            <Btn text="GitHub">
+              <template #icon>
+
+              </template>
+            </Btn>
+          </button>
         </div>
       </form>
       <div class="text-center">
@@ -156,12 +165,12 @@
       </div>
     </div>
     <div>
-      <img src="/img/Img-connexion.webp" alt="Image d'illustration lunettes">
+      <img class="min-h-[700px] h-full hidden lg:block" src="/img/Img-connexion.webp" alt="Image d'illustration lunettes">
     </div>
   </div>
 
   <!-- no account -->
-  <div v-if="showInscription" class="text-center dispo">
+  <div v-if="showInscription" class="text-center max-lg:mb-20 lg:dispo">
     <div class="mt-40">
       <h1 class="mb-8 text-3xl font-Khand font-bold title-shadow">Inscription</h1>
       <form @submit.prevent="register()">
@@ -179,6 +188,13 @@
               </template>
             </Btn>
           </button>
+          <button @click="githubLogin()">
+            <Btn text="GitHub">
+              <template #icon>
+
+              </template>
+            </Btn>
+          </button>
         </div>
       </form>
       <div class="text-center">
@@ -187,12 +203,18 @@
       </div>
     </div>
     <div>
-      <img src="/img/Img-connexion.webp" alt="Image d'illustration lunettes">
+      <img class="min-h-[700px] h-full hidden lg:block" src="/img/Img-connexion.webp" alt="Image d'illustration lunettes">
     </div>
   </div>
 
   <!-- Creation History - Connected -->
-  <div v-if="isConnected">
-
+  <div v-if="isConnected" class="mt-20">
+    <h3 class="ml-20 mb-5 text-2xl font-Khand font-medium">Vos lunettes</h3>
+    <div v-for="lunette in lunettesList" v-key="lunette.id" v-bind="{lunette}">
+      <div v-if="lunettesList.lenght < 0">
+        <p>Vous n'avez pas encore personnalisez vos propres lunettes.</p>
+        <RouterLink to="/Personalisation">Lancez vous dès maintenant !</RouterLink>
+      </div>
+    </div>
   </div>
 </template>
