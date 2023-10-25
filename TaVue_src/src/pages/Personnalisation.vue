@@ -6,8 +6,10 @@ import Btn from '@/components/Btn.vue';
 //
 import { isConnected } from '@/backend'
 
-if(!isConnected)
+if(!isConnected()){
   window.location.href = "/Compte"
+}
+
 
 //
 import {useHead} from '@unhead/vue'
@@ -39,10 +41,10 @@ useHead ({
       <div>
         <div class="flex gap-6 items-center">
           <h3 class="w-20 md:mr-20 mt-2 ml-1 font-Khand font-medium text-lg">Cadre</h3>
-          <div class="w-14 h-8 border cursor-pointer bg-noir"></div>
-          <div class="w-14 h-8 border cursor-pointer bg-gris"></div>
-          <div class="w-14 h-8 border cursor-pointer bg-rouge"></div>
-          <div class="w-14 h-8 border cursor-pointer bg-bleu"></div>
+          <button class="w-14 h-8 border cursor-pointer bg-noir"></button>
+          <button class="w-14 h-8 border cursor-pointer bg-gris"></button>
+          <button class="w-14 h-8 border cursor-pointer bg-rouge"></button>
+          <button class="w-14 h-8 border cursor-pointer bg-bleu"></button>
         </div>
         <div class="mt-1 w-full h-0.5 bg-gris"></div>
       </div>
@@ -50,10 +52,10 @@ useHead ({
       <div>
         <div class="flex gap-6 items-center">
           <h3 class="w-20 md:mr-20 mt-2 ml-1 font-Khand font-medium text-lg">Verres</h3>
-          <div class="w-14 h-8 border cursor-pointer bg-noir"></div>
-          <div class="w-14 h-8 border cursor-pointer bg-gris"></div>
-          <div class="w-14 h-8 border cursor-pointer bg-rouge"></div>
-          <div class="w-14 h-8 border cursor-pointer bg-bleu"></div>
+          <button class="w-14 h-8 border cursor-pointer bg-noir"></button>
+          <button class="w-14 h-8 border cursor-pointer bg-gris"></button>
+          <button class="w-14 h-8 border cursor-pointer bg-rouge"></button>
+          <button class="w-14 h-8 border cursor-pointer bg-bleu"></button>
         </div>
         <div class="mt-1 w-full h-0.5 bg-gris"></div>
       </div>
@@ -61,10 +63,10 @@ useHead ({
       <div>
         <div class="flex gap-6 items-center">
           <h3 class="w-20 md:mr-20 mt-2 ml-1 font-Khand font-medium text-lg">Branches</h3>
-          <div class="w-14 h-8 border cursor-pointer bg-noir"></div>
-          <div class="w-14 h-8 border cursor-pointer bg-gris"></div>
-          <div class="w-14 h-8 border cursor-pointer bg-rouge"></div>
-          <div class="w-14 h-8 border cursor-pointer bg-bleu"></div>
+          <button class="w-14 h-8 border cursor-pointer bg-noir"></button>
+          <button class="w-14 h-8 border cursor-pointer bg-gris"></button>
+          <button class="w-14 h-8 border cursor-pointer bg-rouge"></button>
+          <button class="w-14 h-8 border cursor-pointer bg-bleu"></button>
         </div>
         <div class="mt-1 w-full h-0.5 bg-gris"></div>
       </div>

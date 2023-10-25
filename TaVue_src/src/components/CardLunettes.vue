@@ -14,7 +14,7 @@ defineProps<{
         <div class="max-w-[800px]">
             <h3 class="font-Khand text-headings mb-2 text-xl font-medium">{{ titre }}</h3>
             <p class="mb-5"> {{ description }}</p>
-            <RouterLink to="/Personnalisation"><Btn class="max-w-[285px] h-14" text="Personnaliser votre montre"/></RouterLink>
+            <RouterLink to="/Personnalisation"><Btn class="max-w-[285px] h-14" text="Personnaliser vos lunettes"/></RouterLink>
         </div>
     </div>
 </template>
