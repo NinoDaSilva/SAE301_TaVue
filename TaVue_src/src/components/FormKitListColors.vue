@@ -8,6 +8,7 @@ defineProps<{
 <template>
   <FormKit
     :name="name"
+    :label="label"
     value="#000000"
     type="radio"
     :options="colors"
@@ -19,7 +20,7 @@ defineProps<{
     options-class="flex gap-7">
     
         <template #label="context">
-            <div class="h-8 w-11 mt-2 -ml-2 border-special border-2" :style="{ backgroundColor: context.option.value}"></div>
+            <div class="h-8 w-11 mt-2 -ml-2 border-special border-2" :style="{ backgroundColor: context.option.value }"></div>
         </template>
     </FormKit>
 </template>

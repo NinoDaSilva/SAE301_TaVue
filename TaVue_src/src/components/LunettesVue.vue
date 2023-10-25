@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import type { Lunette} from "@/types";
+import type { Lunette } from "@/types";
 
 withDefaults(defineProps<Lunette>(),{
     branches: "gris",
