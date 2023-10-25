@@ -53,7 +53,8 @@
 
 
 <template>
-    <div>
+    <div class="mt-10">
+        <h4 class="font-Khand text-2xl ml-20 mb-5">Découvrez notre nouvelle boutique !</h4>
         <div class="container-fluid">
             <div id="map"> 
             </div>
