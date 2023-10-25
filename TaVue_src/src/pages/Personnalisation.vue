@@ -1,15 +1,9 @@
-<script setup lang="ts">
+<script setup lang="">
+import { ref, onMounted } from 'vue'
+
 // Import components
 import Promo from '@/components/Promo.vue';
 import Btn from '@/components/Btn.vue';
-
-  import type { Lunette } from "@/types" 
-  import { ref } from "vue";
-  import { useRouter } from "vue-router";
-  import lunettes from "@/components/LunettesVue.vue";
-  import FormKitListColors from "@/components/FormKitListColors.vue";
-
-  const lunette = ref({});
 
 //
 import { isConnected } from '@/backend'
@@ -18,6 +12,32 @@ if(!isConnected()){
   window.location.href = "/Compte"
 }
 
+////
+import PocketBase from 'pocketbase'
+
+// PocketBase vps connexion
+var pocketbase_ip=''
+  if(import.meta.env.MODE === 'production')
+    pocketbase_ip='https://tavue.nino-da-silva.fr/'
+  else
+    pocketbase_ip='http://127.0.0.1:8090'
+
+  const pb = new PocketBase(pocketbase_ip)
+
+let colors = ref([]);
+
+  onMounted(() => {
+    getColors()
+  });
+
+  const getColors = async () => {
+    colors.value = await pb.collection("couleur").getFullList({ sort: 'libelle_couleur' })
+    console.log(colors.value)
+  };
+
+  const selectedMaterial_verre = ref(null)
+  const selectedMaterial_cadre = ref(null)
+  const selectedMaterial_branche = ref(null)
 
 //
 import {useHead} from '@unhead/vue'
@@ -28,60 +48,83 @@ useHead ({
 </script>
 
 <template>
-  <Promo />  
-  
+  <Promo />
+
   <div class="mx-5 lg:mr-20 lg:ml-10 lg:dispo items-center">
     <div class="mx-auto max-lg:mt-14 max-lg:ml-16">
-      <div class="min-w-[400px] xl:w-[600px]">
-        <div class="">
-          <lunettes class="" v-bind="lunette" />
-        </div>
-      </div>
+      <img class="text-center" src="/img/elegance.webp" alt="rendu personnalisation">
       <div class="font-medium mt-5 lg:mt-20 lg:ml-10 text-base lg:text-lg font-Khand">Prix de vente :  85€</div>
     </div>
     
-    <div class="md:ml-20 mx-auto my-20 max-w-[650px]">
-      <FormKit type="form" :submit-attrs="{classes: { input: 'flex justify-center border-2 px-10 py-2 font-semibold items-center hover-btn cursor-pointer mt-10 sm:w-80 h-14' }}" submit-label="Enregistrer mes choix" v-model="lunette">
-        <div>
-          <div class="mt-5 flex gap-4 items-center">
-            <h3 class="w-20 md:mr-20 mt-2 ml-1 font-Khand font-medium text-lg">Type</h3>
-            <Btn class="w-[180px] text-2xs" text="Rectangulaire" />
-            <Btn class="w-[130px] text-2xs" text="Ronde" />
-          </div>
-          <div class="mt-1 w-full h-0.5 bg-gris"></div>
+    <div class="space-y-12 md:ml-20 mx-auto my-20 max-w-[650px]">
+      <div>
+        <div class="flex gap-4 items-center">
+          <h3 class="w-20 md:mr-20 mt-2 ml-1 font-Khand font-medium text-lg">Type</h3>
+          <Btn class="w-[180px] text-2xs" text="Rectangulaire" />
+          <Btn class="w-[130px] text-2xs" text="Ronde" />
         </div>
+        <div class="mt-1 w-full h-0.5 bg-gris"></div>
+      </div>
 
-        <div>
-          <div class="mt-6 flex gap-6 items-center">
-            <h3 class="w-20 md:mr-20 mt-2 ml-1 font-Khand font-medium text-lg">Cadre</h3>
-            <FormKitListColors name="cadre" label="cadre" />
-          </div>
-          <div class="mt-1 w-full h-0.5 bg-gris"></div>
+      <div>
+        <div class="flex gap-6 items-center">
+          <h3 class="w-20 md:mr-20 mt-2 ml-1 font-Khand font-medium text-lg">Cadre</h3>        
         </div>
+        <div class="mt-1 w-full h-0.5 bg-gris"></div>
 
-        <div>
-          <div class="mt-6 flex gap-6 items-center">
-            <h3 class="w-20 md:mr-20 mt-2 ml-1 font-Khand font-medium text-lg">Verres</h3>
-            <FormKitListColors name="verres" label="verres" />
-          </div>
-          <div class="mt-1 w-full h-0.5 bg-gris"></div>
+        <button v-for="couleur in colors" :key="couleur.id" v-bind:style="{ background: couleur.libelle_couleur }"></button>
+
+        <div class="flex gap-4 mt-1">
+          <Btn text="Plastique" v-bind:class="{ 'selected': selectedMaterial_verre === 'Plastique' }"
+            @click="selectedMaterial_cadre = 'Plastique'"/>
+          <Btn text="Bois" v-bind:class="{ 'selected': selectedMaterial_verre === 'Bois' }"
+            @click="selectedMaterial_cadre = 'Bois'"/>
+          <Btn text="Métal" v-bind:class="{ 'selected': selectedMaterial_verre === 'Métal' }"
+            @click="selectedMaterial_cadre = 'Métal'" />
         </div>
+      </div>
 
-        <div>
-          <div class="mt-6 flex gap-6 items-center">
-            <h3 class="w-20 md:mr-20 mt-2 ml-1 font-Khand font-medium text-lg">Branches</h3>
-            <FormKitListColors name="branches" label="branches" />
-          </div>
-          <div class="mt-1 w-full h-0.5 bg-gris"></div>
+      <div>
+        <div class="flex gap-6 items-center">
+          <h3 class="w-20 md:mr-20 mt-2 ml-1 font-Khand font-medium text-lg">Verres</h3>
         </div>
+        <div class="mt-1 w-full h-0.5 bg-gris"></div>
 
-        <div class="pt-6">
-          <h3 class="w-20 md:mr-20 mt-6 ml-1 font-Khand font-medium text-lg">Descriptif</h3>
-          <div class="mt-1 w-full h-0.5 bg-gris"></div>
-          <p class="mt-4">Nos lunettes personnalisables offrent bien plus qu'un simple accessoire, elles représentent une opportunité d'exprimer votre <strong>style</strong> et de posséder un <strong>objet de qualité</strong> qui incarne votre individualité.</p>
+        <button v-for="couleur in colors" :key="couleur.id" v-bind:style="{ background: couleur.libelle_couleur }"></button>
+
+        <div class="flex gap-4 mt-1">
+          <Btn text="Polycarbonate" v-bind:class="{ 'selected': selectedMaterial_verre === 'Polycarbonate' }"
+            @click="selectedMaterial_verre = 'Polycarbonate'"/>
+          <Btn text="Verre" v-bind:class="{ 'selected': selectedMaterial_verre === 'Verre' }"
+            @click="selectedMaterial_verre = 'Verre'"/>
         </div>
+      </div>
 
-      </FormKit>
+      <div>
+        <div class="flex gap-6 items-center">
+          <h3 class="w-20 md:mr-20 mt-2 ml-1 font-Khand font-medium text-lg">Branches</h3>
+        </div>
+        <div class="mt-1 w-full h-0.5 bg-gris"></div>
+
+        <button v-for="couleur in colors" :key="couleur.id" v-bind:style="{ background: couleur.libelle_couleur }"></button>
+        
+        <div class="flex gap-4 mt-1">
+          <Btn text="Plastique" v-bind:class="{ 'selected': selectedMaterial_verre === 'Plastique' }"
+            @click="selectedMaterial_branche = 'Plastique'"/>
+          <Btn text="Bois" v-bind:class="{ 'selected': selectedMaterial_verre === 'Bois' }"
+            @click="selectedMaterial_branche = 'Bois'"/>
+          <Btn text="Métal" v-bind:class="{ 'selected': selectedMaterial_verre === 'Métal' }"
+            @click="selectedMaterial_branche = 'Métal'" />
+        </div>
+      </div>
+
+      <div class="pt-6">
+        <h3 class="w-20 md:mr-20 mt-2 ml-1 font-Khand font-medium text-lg">Descriptif</h3>
+        <div class="mt-1 w-full h-0.5 bg-gris"></div>
+        <p class="mt-4">Nos lunettes personnalisables offrent bien plus qu'un simple accessoire, elles représentent une opportunité d'exprimer votre <strong>style</strong> et de posséder un <strong>objet de qualité</strong> qui incarne votre individualité.</p>
+      </div>
+
+      <Btn class="sm:w-80 h-14" text="Enregistrer mes choix" @click=""/>
     </div>
   </div>
 

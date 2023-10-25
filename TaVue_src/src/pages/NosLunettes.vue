@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="">
 // Import components
 import CardLunettes from '@/components/CardLunettes.vue';
 

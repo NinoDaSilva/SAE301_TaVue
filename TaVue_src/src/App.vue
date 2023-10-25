@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="">
   import { RouterView } from 'vue-router'
   
   // Import components

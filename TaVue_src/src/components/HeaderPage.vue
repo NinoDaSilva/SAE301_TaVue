@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="">
     import { ref, computed, watch } from 'vue'
     import { useWindowScroll } from '@vueuse/core'
 
