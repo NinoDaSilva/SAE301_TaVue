@@ -127,11 +127,11 @@
       </form>
       <div class="text-center">
         <p>Vous n'avez pas de compte ?</p>
-        <button @click="showInscription = true">S'inscrire</button>
+        <button class="font-bold" @click="showInscription = true">S'inscrire</button>
       </div>
     </div>
     <div>
-      <img class="-mt-5" src="/public/img/Img-connexion.webp" alt="Image d'illustration lunettes">
+      <img src="/img/Img-connexion.webp" alt="Image d'illustration lunettes">
     </div>
   </div>
 
@@ -158,11 +158,11 @@
       </form>
       <div class="text-center">
         <p>Vous n'avez pas de compte ?</p>
-        <button @click="showInscription = false">Se connecter</button>
+        <button class="font-bold" @click="showInscription = false">Se connecter</button>
       </div>
     </div>
     <div>
-      <img class="-mt-5" src="/public/img/Img-connexion.webp" alt="Image d'illustration lunettes">
+      <img src="/public/img/Img-connexion.webp" alt="Image d'illustration lunettes">
     </div>
   </div>
 </template>
