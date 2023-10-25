@@ -19,23 +19,3 @@ export function isConnected() {
       return false;
     }
   }
-
-  // Configurateur de lunettes
-  export default {
-    data() {
-      return {
-        branchesColor: {
-          noir: 'black',
-          gris: 'gray',
-          rouge: 'red',
-          bleu: 'blue',
-        },
-      };
-    },
-    methods: {
-      changeColor(color) {
-        // Vous pouvez ici mettre à jour la couleur des branches dans PocketBase.
-        // Par exemple, vous pouvez utiliser PocketBase pour mettre à jour la couleur d'un utilisateur.
-      },
-    },
-  };

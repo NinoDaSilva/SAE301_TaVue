@@ -3,6 +3,14 @@
 import Promo from '@/components/Promo.vue';
 import Btn from '@/components/Btn.vue';
 
+  import type { Lunette } from "@/types" 
+  import { ref } from "vue";
+  import { useRouter } from "vue-router";
+  import lunettes from "@/components/LunettesVue.vue";
+  import FormKitListColors from "@/components/FormKitListColors.vue";
+
+  const lunette = ref({});
+
 //
 import { isConnected } from '@/backend'
 
@@ -22,7 +30,21 @@ useHead ({
 <template>
   <Promo />
 
-  <div class="mx-5 lg:mr-20 lg:ml-10 lg:dispo items-center">
+  <div class="p-2">
+    <div class="row w-64">
+      <lunettes class="carousel-item w-64" v-bind="lunette" />
+    </div>
+    <FormKit type="form" v-model="lunette" @submit="">
+      <FormKitListColors name="branches" label="branches" />
+      <FormKitListColors name="cadre" label="cadre" />
+      <FormKitListColors name="verres" label="verres" />
+
+      <FormKit name="Commander" label="Commander" type="checkbox"  />
+    </FormKit>
+  </div>
+  
+  
+  <!-- <div class="mx-5 lg:mr-20 lg:ml-10 lg:dispo items-center">
     <div class="mx-auto max-lg:mt-14 max-lg:ml-16">
       <img class="text-center" src="/img/elegance.webp" alt="rendu personnalisation">
       <div class="font-medium mt-5 lg:mt-20 lg:ml-10 text-base lg:text-lg font-Khand">Prix de vente :  85€</div>
@@ -79,6 +101,6 @@ useHead ({
 
       <Btn class="sm:w-80 h-14" text="Enregistrer mes choix" />
     </div>
-  </div>
+  </div> -->
 
 </template>

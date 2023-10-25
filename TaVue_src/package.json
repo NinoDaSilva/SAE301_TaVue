@@ -12,6 +12,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@formkit/vue": "^1.2.2",
     "@types/leaflet": "^1.9.7",
     "@unhead/vue": "^1.7.4",
     "@vueuse/core": "^10.5.0",
