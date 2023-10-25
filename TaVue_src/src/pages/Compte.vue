@@ -103,7 +103,7 @@
     <span class="mr-2 ml-2">
       {{ currentUser.name }}
     </span>
-    <button class="btn btn-dark ml-auto" type="button" @click="deconnect()">Déconnexion</button>
+    <button type="button" @click="deconnect()">Déconnexion</button>
   </span>
 
   <!-- User not connected -->

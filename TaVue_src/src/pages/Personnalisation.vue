@@ -4,6 +4,9 @@ import Promo from '@/components/Promo.vue';
 import Btn from '@/components/Btn.vue';
 
 //
+import { isConnected } from '@/backend'
+
+//
 import {useHead} from '@unhead/vue'
 useHead ({
   title: 'Personnalisation - TaVue'
@@ -15,8 +18,11 @@ useHead ({
   <Promo />
 
   <div class="mx-5 lg:mr-20 lg:ml-10 lg:dispo items-center">
-    <img class="text-center max-lg:mt-14 max-lg:ml-16" src="/img/elegance.webp" alt="rendu personnalisation">
-
+    <div class="mx-auto max-lg:mt-14 max-lg:ml-16">
+      <img class="text-center" src="/img/elegance.webp" alt="rendu personnalisation">
+      <div class="font-medium mt-5 lg:mt-20 lg:ml-10 text-base lg:text-lg font-Khand">Prix de vente :  85€</div>
+    </div>
+    
     <div class="space-y-12 md:ml-20 mx-auto my-20 max-w-[650px]">
       <div>
         <div class="flex gap-4 items-center">
