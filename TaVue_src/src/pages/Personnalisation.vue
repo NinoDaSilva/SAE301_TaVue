@@ -6,6 +6,9 @@ import Btn from '@/components/Btn.vue';
 //
 import { isConnected } from '@/backend'
 
+if(!isConnected)
+  window.location.href = "/Compte"
+
 //
 import {useHead} from '@unhead/vue'
 useHead ({
