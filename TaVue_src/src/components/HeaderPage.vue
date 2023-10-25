@@ -43,7 +43,7 @@
             :class="{ '!visible opacity-100 !text-center': menuIsOpen }">
             <ul class="font-primary font-medium lg:gap-2 items-center mt-[14vh] md:m-0 md:flex">
                 <li><RouterLink class="menu-link" to="/NosLunettes" @click="closeMenu">Nos lunettes</RouterLink></li>
-                <li><RouterLink class="menu-link" to="/NosOptions" @click="closeMenu">Nos options</RouterLink></li>
+                <li><RouterLink class="menu-link" to="/Compte" @click="closeMenu">Nos options</RouterLink></li>
                 <li><RouterLink class="menu-link" to="/Personnalisation" @click="closeMenu">Personnalisation</RouterLink></li>
                 <li><RouterLink class="link" to="/Compte" @click="closeMenu"><IconAccount class="max-md:hidden sm:w-14 sm:h-14 lg:ml-10" /></RouterLink></li>
             </ul>

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="">
     import { ref, onMounted } from 'vue'
     // Import PocketBase
     import PocketBase from 'pocketbase'
@@ -99,7 +99,7 @@
 <template>
   <!-- User connected -->
   <span v-if="isConnected">
-    <img src="avatar" class="img-fluid" alt="avatar" style="max-width:60px;" />
+    <img :src=avatar class="img-fluid" alt="avatar" style="max-width:60px;" />
     <span class="mr-2 ml-2">
       {{ currentUser.name }}
     </span>
@@ -162,7 +162,12 @@
       </div>
     </div>
     <div>
-      <img src="/public/img/Img-connexion.webp" alt="Image d'illustration lunettes">
+      <img src="/img/Img-connexion.webp" alt="Image d'illustration lunettes">
     </div>
+  </div>
+
+  <!-- Creation History - Connected -->
+  <div v-if="isConnected">
+
   </div>
 </template>

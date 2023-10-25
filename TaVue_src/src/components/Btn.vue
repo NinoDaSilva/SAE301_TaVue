@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-    <div class="flex border-2 px-10 py-2 font-semibold items-center hover-btn">
+    <div class="flex justify-center border-2 px-10 py-2 font-semibold items-center hover-btn">
         <slot name="icon"></slot>
         {{ text }}
     </div>

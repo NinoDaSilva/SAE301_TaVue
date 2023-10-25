@@ -1,7 +1,8 @@
-<script setup lang="ts">
+<script setup lang="">
   // Import components
   import Map from '@/components/Map.vue';
   import CardLunettes from '@/components/CardLunettes.vue';
+  import Btn from '@/components/Btn.vue';
 
   //
   import {useHead} from '@unhead/vue'
@@ -15,6 +16,7 @@
   <div class="relative grid grid-cols-2 text-center">
     <div class="absolute flex w-full h-full items-center justify-center">
       <p class="title-shadow w-[500px] md:w-[700px] md:text-lg text-blanc font-semibold lg:w-[900px] lg:text-xl">N'attendez pas ! Personnalisez vos lunettes maintenant et ne manquez pas l'occasion d'obtenir le modèle qui vous correspond</p>
+      <RouterLink class="absolute mt-60 text-blanc bg-blanc bg-opacity-5 h-12" to="/Personnalisation"><Btn text="Personnalisez vos lunettes"/></RouterLink>
     </div>
     <img src="/img/Img-home1.webp" alt="image femme lunettes">
     <img src="/img/Img-home2.webp" alt="image homme lunettes">

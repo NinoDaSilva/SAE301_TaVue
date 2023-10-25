@@ -7,7 +7,11 @@ export default {
       blanc:      '#fafafa',
       secondary:  '#EAEAEA',
       headings:   '#723701',
-      text:       '#1E1E1E'
+      text:       '#1E1E1E',
+      rouge:      '#F65C50',
+      bleu:       '#504DD8',
+      gris:       '#616161',
+      noir:       '#171717',
     },
     fontFamily: {
       Khand:  ['Khand', 'sans-serif'],

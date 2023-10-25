@@ -22,6 +22,6 @@
     <Suspense>
       <RouterView />
     </Suspense>
-  </main>
+  </main>w
   <FooterPage />
 </template>
