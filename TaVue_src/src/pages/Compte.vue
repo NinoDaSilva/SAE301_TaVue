@@ -11,7 +11,7 @@
     // PocketBase vps connexion
     var pocketbase_ip=''
     if(import.meta.env.MODE === 'production')
-        pocketbase_ip='https://tavue.nino-da-silva.fr'
+        pocketbase_ip='http://tavue.nino-da-silva.fr'
     else
         pocketbase_ip='http://127.0.0.1:8090'
 

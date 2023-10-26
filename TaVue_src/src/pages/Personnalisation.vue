@@ -18,26 +18,65 @@ import PocketBase from 'pocketbase'
 // PocketBase vps connexion
 var pocketbase_ip=''
   if(import.meta.env.MODE === 'production')
-    pocketbase_ip='https://tavue.nino-da-silva.fr/'
+    pocketbase_ip='http://tavue.nino-da-silva.fr'
   else
     pocketbase_ip='http://127.0.0.1:8090'
 
   const pb = new PocketBase(pocketbase_ip)
 
-let colors = ref([]);
+
+  // Partie configurateur
+  let colors = [];
 
   onMounted(() => {
     getColors()
   });
 
+  // Récupération des couleurs
   const getColors = async () => {
-    colors.value = await pb.collection("couleur").getFullList({ sort: 'libelle_couleur' })
-    console.log(colors.value)
+    colors.value = await pb.collection("couleurs").getFullList({ sort: 'libelle_couleur' })
+    console.log("couleurs", colors.value)
   };
 
+  // Initialisation des variables
   const selectedMaterial_verre = ref(null)
   const selectedMaterial_cadre = ref(null)
   const selectedMaterial_branche = ref(null)
+
+  // Data pb
+  let newLunettes = ref({
+    prix: "",
+    user: "",
+    commande: "",
+    couleur_cadre: "",
+    couleur_verres: "",
+    couleur_branches: "",
+    materiaux_cadre: "",
+    materiaux_verres: "",
+    materiaux_branches: "",
+    forme: ""
+  });
+
+  // Séléction de la couleur
+  const selectColors = (type, item) => {
+    if(type == "cadre"){
+      selectedColor_cadre.value = item.hexa;
+      newLunettes.value.couleur_cadre = item.id;
+    }else if(type == "verres"){
+      selectedColor_verres.value = item.hexa;
+      newLunettes.value.couleur_verres = item.id;
+    }else if(type == "branches"){
+      selectedColor_branches.value = item.hexa;
+      newLunettes.value.couleur_branches = item.id;
+    }
+  };
+
+  // Création de la lunette dans PocketBase
+  const createLunettes = async() => {
+    await pb.collection('lunette').create(newLunettes.value);
+    alert("Vos lunettes ont été enregistrées avec succès !")
+    window.location.href = "/Compte"
+  }
 
 //
 import {useHead} from '@unhead/vue'
