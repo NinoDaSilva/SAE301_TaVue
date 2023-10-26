@@ -49,4 +49,8 @@
     input[type="radio"] {
         display: none;
     }
+    .btn-selected.selected {
+        box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
+        border: 3px solid #000;
+    }
 }

@@ -119,7 +119,23 @@
       avatarElement.addClassName("hidden");
     }
   };
+  //
 
+  // Récupération des lunettes de l'utilisateur
+  let lunettesList = ref([])
+  const getLunettes = async() => {
+    try{
+      const records = await pb.collection('lunetteUser').getFullList({
+        sort: '-created',
+        filter: {
+          userId: currentUser.value.id
+        }
+      });
+      lunettesList.value = records
+    }catch(error){
+      console.error("Erreur lors de la récupération des lunettes")
+    }
+  }
 
   // Plugin pour le titre de la page
   import {useHead} from '@unhead/vue'
@@ -131,14 +147,16 @@
 
 <template>
   <!-- User connected -->
-  <span v-if="isConnected" class="mt-10 mb-10 grid text-center">
-    <img id="avatar" :src="avatar" class="hidden mx-auto mb-4" alt="avatar" />
-    <h2 class="text-xl mb-2">Heureux de vous revoir !</h2>
-    <span class="mr-2 ml-2 text-lg">
-      {{ currentUser.username }}
-    </span>
-    <button class="mx-auto w-[200px] h-12 mt-5" type="button" @click="deconnect()"><Btn class="" text="Déconnexion" /></button>
-  </span>
+  <div v-if="isConnected" class="mt-10 mb-10 max-md:text-center md:flex md:justify-between md:mx-20 xl:mx-40">
+    <div class="">
+      <img id="avatar" :src="avatar" class="hidden mx-auto mb-4" alt="avatar" />
+      <h2 class="text-xl mb-2">Heureux de vous revoir !</h2>
+      <span class="mr-2 text-lg">
+        {{ currentUser.username }}
+      </span>
+    </div>
+    <button class="w-[200px] h-12 mt-5" type="button" @click="deconnect()"><Btn class="" text="Déconnexion" /></button>
+  </div>
 
   <!-- User not connected -->
   <div v-if="!isConnected && !showInscription" class="text-center max-lg:mb-20 lg:dispo">
@@ -216,13 +234,17 @@
   </div>
 
   <!-- Creation History - Connected -->
-  <div v-if="isConnected" class="mt-20">
-    <h3 class="ml-20 mb-5 text-2xl font-Khand font-medium">Vos lunettes</h3>
-    <div v-for="lunette in lunettesList" v-key="lunette.id" v-bind="{lunette}">
-      <div v-if="lunettesList.lenght < 0">
-        <p>Vous n'avez pas encore personnalisez vos propres lunettes.</p>
-        <RouterLink to="/Personalisation">Lancez vous dès maintenant !</RouterLink>
+  <div v-if="isConnected" class="mt-20 mb-10 ml-6 md:mx-20 xl:mx-40">
+    <h3 class="mb-5 text-2xl font-Khand font-medium">Vos lunettes</h3>
+    <!-- <div>
+      <div v-if="lunettesList.length > 0">
+        <CardHistorique v-for="lunette in lunettesList" v-key="lunette.id" v-bind="{ lunette }" />
       </div>
-    </div>
+      <div v-else>
+        <p>Vous n'avez pas encore personnalisez vos propres lunettes.</p>
+        <RouterLink to="/Personnalisation"><Btn class="mt-2 w-fit" text="Lancez vous dès maintenant !"/></RouterLink>
+      </div>
+    </div> -->
+    <CardHistorique />
   </div>
 </template>
