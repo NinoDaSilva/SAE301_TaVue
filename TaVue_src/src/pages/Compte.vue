@@ -11,7 +11,7 @@
     // PocketBase vps connexion
     var pocketbase_ip=''
     if(import.meta.env.MODE === 'production')
-        pocketbase_ip='https://tavue.nino-da-silva.fr/'
+        pocketbase_ip='https://tavue.nino-da-silva.fr'
     else
         pocketbase_ip='http://127.0.0.1:8090'
 
@@ -34,7 +34,7 @@
         currentUser.value = pb.authStore.model
         isConnected.value = true
 
-        avatar.value = pocketbase_ip+"/api/files" //adresse serveur et du repertoire des fichiers img
+        avatar.value = pocketbase_ip+"/api/files/" //adresse serveur et du repertoire des fichiers img
             +currentUser.value.collectionId
             +"/"
             +currentUser.value.id //Id de l'utilisateur connecté
@@ -111,12 +111,12 @@
   const avatarElement = document.getElementById("avatar");
 
   if (avatarElement) {
-    if (avatar.value == null) {
-      // Cacher l'élément
-      avatarElement.addClassName("hidden");
-    } else {
+    if (avatar.value) {
       // Afficher l'élément
       avatarElement.removeClassName("hidden");
+    } else {
+      // Cacher l'élément
+      avatarElement.addClassName("hidden");
     }
   };
 
@@ -132,7 +132,7 @@
 <template>
   <!-- User connected -->
   <span v-if="isConnected" class="mt-10 mb-10 grid text-center">
-    <img id="avatar" :src=avatar class="hidden mx-auto mb-4" alt="avatar" />
+    <img id="avatar" :src="avatar" class="hidden mx-auto mb-4" alt="avatar" />
     <h2 class="text-xl mb-2">Heureux de vous revoir !</h2>
     <span class="mr-2 ml-2 text-lg">
       {{ currentUser.username }}
