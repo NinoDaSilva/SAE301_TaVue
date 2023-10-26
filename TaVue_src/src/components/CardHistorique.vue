@@ -11,18 +11,26 @@
             userId: currentUser.value.id
             }
         });
-        lunettesList.value = records
         }catch(error){
         console.error("Erreur lors de la récupération des lunettes")
         }
     }
+
+    const deleteLunette = async(lunetteId) => {
+        try{
+        const records = pb.collection('lunetteUser').delete({ id: lunetteId });
+        }catch(error){
+            console.error("Erreur lors de la suppression de la lunette", error);
+        }
+    }
+
 </script>
 
 <template>
-    <div class="bg-secondary flex p-10">
+    <div class="bg-secondary lg:relative lg:flex p-5 sm:p-10">
         <!-- Visualisation du produit -->
         <div>
-            <div class="flex mt-8 w-[400px] h-[250px]">
+            <div class="md:flex mt-8 w-[400px] h-[250px]">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 454.95 195.19">
                     <g class="cls-6">
                         <g id="branches">
@@ -48,44 +56,44 @@
                             <path class="cls-3" d="m125.74,65.17s-5.28-13.84-20.54-20.3c-7.88-3.33-15.91-6.09-22.65-8.12-6.32-1.9-11.49-3.15-14.33-3.62-5.87-.98-26.61-4.7-28.76-4.5s-6.46.68-10.57.83-5.48,0-5.48,0c0,0,4.17,2.01,10.96.93,5.32-.84,17.41.98,17.41.98,0,0,54.98,4.99,73.96,33.8Z"/>
                         </g>
                         <g id="verres">
-                            <path :style="`fill: ${selectedColor_verres};`" class="cls-1" d="m31.27,50.87c-.88,6.05.4,37.41,11.44,55.31s37.04,21.35,41.37,21.31,18.51,1.02,24.47-9.27c4.97-8.59,13.17-43.48,9.12-53.05-6.26-14.82-40.4-24.02-40.4-24.02,0,0-26.85-5.46-33.82-4.46,0,0-9.97-.96-12.17,14.17Z"/>
-                            <path :style="`fill: ${selectedColor_verres};`" class="cls-1" d="m162.28,80.55s-1.09-9.55,19.57-16.69c11.76-4.06,60.46,3.23,60.46,3.23,0,0,19.09,4.06,21.71,8.28,2.62,4.22,9.46,17.24,8.29,37.97-1.14,20.21-7.31,26.8-12.61,30.31,0,0-7.1,4.93-21.34,5.93-26.65,1.88-37.01-1.14-46.19-7.73-29.88-21.46-29.88-61.3-29.88-61.3Z"/>
+                            <path style="opacity:0.8" :style="`fill: ${selectedColor_verres};`" class="cls-1" d="m31.27,50.87c-.88,6.05.4,37.41,11.44,55.31s37.04,21.35,41.37,21.31,18.51,1.02,24.47-9.27c4.97-8.59,13.17-43.48,9.12-53.05-6.26-14.82-40.4-24.02-40.4-24.02,0,0-26.85-5.46-33.82-4.46,0,0-9.97-.96-12.17,14.17Z"/>
+                            <path style="opacity:0.8" :style="`fill: ${selectedColor_verres};`" class="cls-1" d="m162.28,80.55s-1.09-9.55,19.57-16.69c11.76-4.06,60.46,3.23,60.46,3.23,0,0,19.09,4.06,21.71,8.28,2.62,4.22,9.46,17.24,8.29,37.97-1.14,20.21-7.31,26.8-12.61,30.31,0,0-7.1,4.93-21.34,5.93-26.65,1.88-37.01-1.14-46.19-7.73-29.88-21.46-29.88-61.3-29.88-61.3Z"/>
                             <path class="cls-2" d="m252.75,77.35s9.88,1.12,10.74,10.79c0,0-4.73-9.55-10.74-10.79Z"/>
                         </g>
                     </g>
                 </svg>
             </div>
         </div>
-        <div>
+        <div class="lg:mt-5">
             <!-- Liste des options des composants -->
-            <ul>
-                <li>
-                    <label>Cadre</label>
-
+            <ul class="ml-10 space-y-5">
+                <li class="flex">
+                    <label class="w-20 mr-6">Cadre</label>
+                    <div class="border w-10 h-8" :style="`backgroundColor: ${ selectedColor_cadre };`"></div>
                 </li>
-                <li>
-                    <label>Verres</label>
-
+                <li class="flex">
+                    <label class="w-20 mr-6">Verres</label>
+                    <div class="border w-10 h-8" :style="`backgroundColor: ${ selectedColor_verres };`"></div>
                 </li>
-                <li>
-                    <label>Branches</label>
-
+                <li class="flex">
+                    <label class="w-20 mr-6">Branches</label>
+                    <div class="border w-10 h-8" :style="`backgroundColor: ${ selectedColor_branches };`"></div>
                 </li>
-                <li>
-                    <label>Type</label>
-
+                <li class="flex">
+                    <label class="w-20 mr-6">Type</label>
+                    <div class="border p-3 px-5">{{ selectedForme }}</div>
                 </li>
             </ul>
         </div>
         <!-- Actions -->
-        <div class="flex gap-6">
-            <Btn class="w-[200px] h-12 mt-5" text="Supprimer" >
+        <div class="ml-10 lg:absolute lg:bottom-6 lg:right-16 mt-10 flex flex-wrap gap-6">
+            <Btn class="w-[200px] h-12" text="Supprimer" @click="deleteLunette(lunette.id)">
                 <template #icon>
                     <IconTrash />
                 </template>
             </Btn>
 
-            <Btn class="w-[200px] h-12 mt-5" text="| Commander">
+            <Btn class="w-[200px] h-12" text="| Commander">
                 <template #icon>
                     <!-- {{ prix }} -->
                 </template>

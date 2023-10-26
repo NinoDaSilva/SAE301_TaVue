@@ -44,9 +44,6 @@
         }
     }
 
-  onMounted(async () => {
-      refresh()
-  })
 
   // Fonction connexion
   const connect = async() => {
@@ -119,10 +116,9 @@
       avatarElement.addClassName("hidden");
     }
   };
-  //
+  //--//
 
   // Récupération des lunettes de l'utilisateur
-  let lunettesList = ref([])
   const getLunettes = async() => {
     try{
       const records = await pb.collection('lunetteUser').getFullList({
@@ -131,18 +127,24 @@
           userId: currentUser.value.id
         }
       });
-      lunettesList.value = records
+      return records;
     }catch(error){
       console.error("Erreur lors de la récupération des lunettes")
     }
   }
+
+
+  onMounted(async () => {
+    refresh()
+  })
+  
 
   // Plugin pour le titre de la page
   import {useHead} from '@unhead/vue'
   useHead ({
     title: 'Compte - TaVue'
   }) 
-  //
+  //--//
 </script>
 
 <template>
@@ -245,6 +247,9 @@
         <RouterLink to="/Personnalisation"><Btn class="mt-2 w-fit" text="Lancez vous dès maintenant !"/></RouterLink>
       </div>
     </div> -->
+
+    <!-- /!\ Historique des lunettes si non fonctionnel (juste pour visualiser) /!\ -->
     <CardHistorique />
+    <!--  -->
   </div>
 </template>
