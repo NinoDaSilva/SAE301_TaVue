@@ -22,13 +22,13 @@ useHead ({
       <CardLunettes 
         titre="Horizon Brillant"
         description="Avec notre modèle Horizon Brillant, projetez-vous dans un futur radieux. Ces lunettes audacieuses confirment votre confiance envers un style innovant et avant-gardiste. Ancrées dans la recherche de l'excellence, elles reflètent une vision unique de la mode. Ne perdez pas de temps pour rejoindre l'avenir de la tendance."
-        image="/img/elegance.webp"
+        image="/img/horizon.webp"
       />
 
       <CardLunettes 
         titre="Visionnaire Minimaliste"
         description="Notre modèle Visionnaire Minimaliste incarne la simplicité et le contrôle de votre style. Ancré dans la philosophie du moins c'est plus, ces lunettes évoquent une élégance subtile. Vous n'avez rien à perdre en adoptant ce look épuré, mais vous avez tout à gagner en termes de sophistication."  
-        image="/img/elegance.webp"
+        image="/img/visionnaire.webp"
       />
     </div>
 </template>
