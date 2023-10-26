@@ -13,10 +13,10 @@
 </script>
 
 <template>
-  <div class="relative grid grid-cols-2 text-center">
+  <div class="relative grid grid-cols-2 text-center overflow-hidden">
     <div class="absolute flex w-full h-full items-center justify-center">
-      <p class="title-shadow w-[500px] md:w-[700px] md:text-lg text-blanc font-semibold lg:w-[900px] lg:text-xl">N'attendez pas ! Personnalisez vos lunettes maintenant et ne manquez pas l'occasion d'obtenir le modèle qui vous correspond</p>
-      <RouterLink class="absolute mt-60 text-blanc bg-blanc bg-opacity-5 h-12" to="/Personnalisation"><Btn text="Personnalisez vos lunettes"/></RouterLink>
+      <p class="max-sm:leading-5 max-sm:-mt-6 title-shadow w-[400px] sm:w-[600px] md:w-[700px] sm:text-lg text-blanc font-semibold lg:w-[900px] lg:text-xl">N'attendez pas ! Personnalisez vos lunettes maintenant et ne manquez pas l'occasion d'obtenir le modèle qui vous correspond</p>
+      <RouterLink class="absolute mt-28 sm:mt-40 lg:mt-60 text-blanc bg-blanc bg-opacity-5" to="/Personnalisation"><Btn class="max-sm:p-4 max-sm:h-8 max-sm:text-2xs" text="Personnalisez vos lunettes"/></RouterLink>
     </div>
     <img src="/img/Img-home1.webp" alt="image femme lunettes">
     <img src="/img/Img-home2.webp" alt="image homme lunettes">
