@@ -1,31 +1,44 @@
 <script setup lang="">
-import { ref, onMounted } from 'vue'
+  import { ref, onMounted } from 'vue'
 
-// Import components
-import Promo from '@/components/Promo.vue';
-import Btn from '@/components/Btn.vue';
+  // Import components
+  import Promo from '@/components/Promo.vue';
+  import Btn from '@/components/Btn.vue';
+  import LunettesVue from '@/components/LunettesVue.vue'
 
-//
-import { isConnected } from '@/backend'
+  // Import backend
+  import { isConnected } from '@/backend'
 
-if(!isConnected()){
-  window.location.href = "/Compte"
-}
+  // Vérification de la connexion (sinon redirection vers la page de connexion)
+  if(!isConnected()){
+    window.location.href = "/Compte"
+  }
 
-////
-import PocketBase from 'pocketbase'
+  // PocketBase //
+  import PocketBase from 'pocketbase'
 
-// PocketBase vps connexion
-var pocketbase_ip=''
-  if(import.meta.env.MODE === 'production')
-    pocketbase_ip='http://tavue.nino-da-silva.fr'
-  else
-    pocketbase_ip='http://127.0.0.1:8090'
+  // PocketBase vps connexion
+  var pocketbase_ip=''
+    if(import.meta.env.MODE === 'production')
+      pocketbase_ip='http://tavue.nino-da-silva.fr'
+    else
+      pocketbase_ip='http://127.0.0.1:8090'
 
-  const pb = new PocketBase(pocketbase_ip)
+    const pb = new PocketBase(pocketbase_ip)
+  //--//
 
 
-  // Partie configurateur
+  // Partie configurateur //
+
+  // Initialisation des variables
+  let selectedMaterial_verre = ref(null)
+  let selectedMaterial_cadre = ref(null)
+  let selectedMaterial_branche = ref(null)
+
+  let selectedColor_cadre = ref("Gris")
+  let selectedColor_verres = ref("Gris")
+  let selectedColor_branches = ref("Gris")
+
   let colors = [];
 
   onMounted(() => {
@@ -35,13 +48,8 @@ var pocketbase_ip=''
   // Récupération des couleurs
   const getColors = async () => {
     colors.value = await pb.collection("couleurs").getFullList({ sort: 'libelle_couleur' })
-    console.log("couleurs", colors.value)
+console.log("Import couleurs", colors.value)
   };
-
-  // Initialisation des variables
-  const selectedMaterial_verre = ref(null)
-  const selectedMaterial_cadre = ref(null)
-  const selectedMaterial_branche = ref(null)
 
   // Data pb
   let newLunettes = ref({
@@ -59,15 +67,18 @@ var pocketbase_ip=''
 
   // Séléction de la couleur
   const selectColors = (type, item) => {
-    if(type == "cadre"){
-      selectedColor_cadre.value = item.hexa;
-      newLunettes.value.couleur_cadre = item.id;
-    }else if(type == "verres"){
-      selectedColor_verres.value = item.hexa;
+    if(type == "cadre"){ // cadre
+      selectedColor_cadre.value = item.libelle_couleur; // couleur sélectionnée
+      newLunettes.value.couleur_cadre = item.id; // id de la couleur
+  console.log("couleur cadre", item.libelle_couleur)
+    }else if(type == "verres"){ // verres
+      selectedColor_verres.value = item.libelle_couleur;
       newLunettes.value.couleur_verres = item.id;
-    }else if(type == "branches"){
-      selectedColor_branches.value = item.hexa;
+  console.log("couleur verre", item.libelle_couleur)
+    }else if(type == "branches"){ // branches
+      selectedColor_branches.value = item.libelle_couleur;
       newLunettes.value.couleur_branches = item.id;
+  console.log("couleur branche", item.libelle_couleur)
     }
   };
 
@@ -75,23 +86,27 @@ var pocketbase_ip=''
   const createLunettes = async() => {
     await pb.collection('lunette').create(newLunettes.value);
     alert("Vos lunettes ont été enregistrées avec succès !")
-    window.location.href = "/Compte"
+    window.location.href = "/Compte" // Redirection vers la page Compte
   }
 
-//
-import {useHead} from '@unhead/vue'
-useHead ({
-  title: 'Personnalisation - TaVue'
-}) 
-//
+  //--//
+
+
+  // Plugin pour le titre de la page
+  // (A la fin du script pour éviter des erreurs)
+  import {useHead} from '@unhead/vue'
+  useHead ({
+    title: 'Personnalisation - TaVue'
+  }) 
+  //--//
 </script>
 
 <template>
   <Promo />
 
   <div class="mx-5 lg:mr-20 lg:ml-10 lg:dispo items-center">
-    <div class="mx-auto max-lg:mt-14 max-lg:ml-16">
-      <img class="text-center" src="/img/elegance.webp" alt="rendu personnalisation">
+    <div class="mx-[8%] max-lg:mt-14 max-lg:ml-16">
+      <LunettesVue />
       <div class="font-medium mt-5 lg:mt-20 lg:ml-10 text-base lg:text-lg font-Khand">Prix de vente :  85€</div>
     </div>
     
