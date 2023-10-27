@@ -113,19 +113,18 @@
         prix: 89.99,
         user: pb.authStore.model.id,
         commande: false,
-        couleur_cadre: Color_cadre.value,
-        couleur_verres: Color_verre.value,
-        couleur_branches: Color_branches.value,
-        materiaux_cadre: selectedMaterial_cadre.value,
-        materiaux_verres: selectedMaterial_verre.value,
-        materiaux_branches: selectedMaterial_branche.value,
-        forme: selectedForme.value,
+        couleur_cadre:        Color_cadre.value,
+        couleur_verres:       Color_verre.value,
+        couleur_branches:     Color_branches.value,
+        materiaux_cadre:      selectedMaterial_cadre.value,
+        materiaux_verres:     selectedMaterial_verre.value,
+        materiaux_branches:   selectedMaterial_branche.value,
+        forme:                selectedForme.value,
       });
-      console.log("couleur", selectedColor_cadre.value);
       await pb.collection('lunette').create(newLunettes);
       alert("Vos lunettes ont été enregistrées avec succès !"); // Message de succès
-      //window.location.href = "/Compte" // Redirection vers la page Compte
-      console.log("données envoyées", newLunettes.value);
+      window.location.href = "/Compte" // Redirection vers la page Compte
+  console.log("donnees envoyees", newLunettes.value);
     } catch(error) {
       alert("Oups ! Vos lunettes n'ont pas été enregistrées. Réessayez")
     }
