@@ -49,35 +49,83 @@
   let colors = ref([]);
 
   onMounted(() => {
-    getColors()
+    
   });
 
-  // Récupération des couleurs
-  const getColors = async () => {
-    colors.value = await pb.collection("couleurs").getFullList({ sort: 'libelle_couleur' })
-console.log("Import couleurs", colors.value)
-  };
+  // Configuration des couleurs
+  let Color_cadre = ref()
+  let Color_verre = ref()
+  let Color_branches = ref()
+  // Couleur des verres
+  const selectColor_verre = (type) => {
+    if(type == "Noir") {
+      selectedColor_verres.value = Noir.value;
+      Color_verre.value = "Noir";
+    } else if(type == "Gris") {
+      selectedColor_verres.value = Gris.value;
+      Color_verre.value = "Gris";
+    } else if(type == "Rouge") {
+      selectedColor_verres.value = Rouge.value;
+      Color_verre.value = "Rouge";
+    } else if(type == "Bleu") {
+      selectedColor_verres.value = Bleu.value;
+      Color_verre.value = "Bleu";
+    }
+  }
+  // Couleur des branches
+  const selectColor_branches = (type) => {
+    if(type == "Noir") {
+      selectedColor_branches.value = Noir.value;
+      Color_branches.value = "Noir";
+    } else if(type == "Gris") {
+      selectedColor_branches.value = Gris.value;
+      Color_branches.value = "Gris";
+    } else if(type == "Rouge") {
+      selectedColor_branches.value = Rouge.value;
+      Color_branches.value = "Rouge";
+    } else if(type == "Bleu") {
+      selectedColor_branches.value = Bleu.value;
+      Color_branches.value = "Bleu";
+    }
+  }
+  // Couleur du cadre
+  const selectColor_cadre = (type) => {
+    if(type == "Noir") {
+      selectedColor_cadre.value = Noir.value;
+      Color_cadre.value = "Noir";
+    } else if(type == "Gris") {
+      selectedColor_cadre.value = Gris.value;
+      Color_cadre.value = "Gris";
+    } else if(type == "Rouge") {
+      selectedColor_cadre.value = Rouge.value;
+      Color_cadre.value = "Rouge";
+    } else if(type == "Bleu") {
+      selectedColor_cadre.value = Bleu.value;
+      Color_cadre.value = "Bleu";
+    }
+  }
+  //--//
 
-  // Création de la lunette dans PocketBase
-
+  // Enregistrement de la paire de lunettes dans PocketBase
   const createLunettes = async() => {
     try {
-      // Data pb
       const newLunettes = ref({
         prix: 89.99,
         user: pb.authStore.model.id,
         commande: false,
-        couleur_cadre: selectedColor_cadre.value,
-        couleur_verres: selectedColor_verres.value,
-        couleur_branches: selectedColor_branches.value,
+        couleur_cadre: Color_cadre.value,
+        couleur_verres: Color_verre.value,
+        couleur_branches: Color_branches.value,
         materiaux_cadre: selectedMaterial_cadre.value,
         materiaux_verres: selectedMaterial_verre.value,
         materiaux_branches: selectedMaterial_branche.value,
-        forme: selectedForme.value
+        forme: selectedForme.value,
       });
+      console.log("couleur", selectedColor_cadre.value);
       await pb.collection('lunette').create(newLunettes);
       alert("Vos lunettes ont été enregistrées avec succès !"); // Message de succès
-      window.location.href = "/Compte" // Redirection vers la page Compte
+      //window.location.href = "/Compte" // Redirection vers la page Compte
+      console.log("données envoyées", newLunettes.value);
     } catch(error) {
       alert("Oups ! Vos lunettes n'ont pas été enregistrées. Réessayez")
     }
@@ -155,13 +203,13 @@ console.log("Import couleurs", colors.value)
         <!-- Selection de la couleur du cadre -->
         <div class="flex gap-4 mt-2 mb-2">
           <Btn class="bg-noir h-7 btn-selected" text="" v-bind:class="{ 'selected': selectedColor_cadre === Noir }"
-            @click="selectedColor_cadre = Noir"/>
+            @click="selectColor_cadre('Noir')"/>
           <Btn class="bg-gris h-7 btn-selected" text="" v-bind:class="{ 'selected': selectedColor_cadre === Gris }"
-            @click="selectedColor_cadre = Gris"/>
+            @click="selectColor_cadre('Gris')"/>
           <Btn class="bg-rouge h-7 btn-selected" text="" v-bind:class="{ 'selected': selectedColor_cadre === Rouge }"
-            @click="selectedColor_cadre = Rouge" />
+            @click="selectColor_cadre('Rouge')" />
           <Btn class="bg-bleu h-7 btn-selected" text="" v-bind:class="{ 'selected': selectedColor_cadre === Bleu }"
-            @click="selectedColor_cadre = Bleu" />
+            @click="selectColor_cadre('Bleu')" />
         </div> 
         <!-- Selection du materiaux du cadre -->
         <div class="flex gap-4 mt-1">
@@ -182,13 +230,13 @@ console.log("Import couleurs", colors.value)
         <!-- Selection de la couleur des verres -->
         <div class="flex gap-4 mt-2 mb-2">
           <Btn class="bg-noir h-7 btn-selected" text="" v-bind:class="{ 'selected': selectedColor_verres === Noir }"
-            @click="selectedColor_verres = Noir"/>
+            @click="selectColor_verre('Noir')"/>
           <Btn class="bg-gris h-7 btn-selected" text="" v-bind:class="{ 'selected': selectedColor_verres === Gris }"
-            @click="selectedColor_verres = Gris"/>
+            @click="selectColor_verre('Gris')"/>
           <Btn class="bg-rouge h-7 btn-selected" text="" v-bind:class="{ 'selected': selectedColor_verres === Rouge }"
-            @click="selectedColor_verres = Rouge" />
+            @click="selectColor_verre('Rouge')" />
           <Btn class="bg-bleu h-7 btn-selected" text="" v-bind:class="{ 'selected': selectedColor_verres === Bleu }"
-            @click="selectedColor_verres = Bleu" />
+            @click="selectColor_verre('Bleu')" />
         </div> 
         <!-- Selection du materiaux des verres -->
         <div class="flex gap-4 mt-1">
@@ -207,13 +255,13 @@ console.log("Import couleurs", colors.value)
         <!-- Selection de la couleur des branches -->
         <div class="flex gap-4 mt-2 mb-2">
           <Btn class="bg-noir h-7 btn-selected" text="" v-bind:class="{ 'selected': selectedColor_branches === Noir }"
-            @click="selectedColor_branches = Noir"/>
+            @click="selectColor_branches('Noir')"/>
           <Btn class="bg-gris h-7 btn-selected" text="" v-bind:class="{ 'selected': selectedColor_branches === Gris }"
-            @click="selectedColor_branches = Gris"/>
+            @click="selectColor_branches('Gris')"/>
           <Btn class="bg-rouge h-7 btn-selected" text="" v-bind:class="{ 'selected': selectedColor_branches === Rouge }"
-            @click="selectedColor_branches = Rouge" />
+            @click="selectColor_branches('Rouge')" />
           <Btn class="bg-bleu h-7 btn-selected" text="" v-bind:class="{ 'selected': selectedColor_branches === Bleu }"
-            @click="selectedColor_branches = Bleu" />
+            @click="selectColor_branches('Bleu')" />
         </div>        
         <!-- Selection du materiaux des branches -->
         <div class="flex gap-4 mt-1">
